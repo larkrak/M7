@@ -1,0 +1,35 @@
+
+html{
+    height: 100%;
+}
+
+body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+table{
+    width: 20%;
+    margin: auto;
+    background-color: #faf2b9;
+    border-collapse: collapse;
+}
+
+table th{
+    background-color: grey;
+    padding: 10px;
+    border-bottom: 5px solid white;
+}
+
+table tr{
+    text-align: center;
+}
+
+table tr td{
+    padding: 5px;
+    width: 50%;
+    border-bottom: 5px solid white;
+}
