@@ -15,10 +15,13 @@ body,*{
 form{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 300px;
-    padding: 20px;
+    padding: 30px;
+    height: 250px;
     background-color: #FFFBDD;
     margin: auto;
+    outline: 2px solid grey;
 }
 form label{
     display: block;
