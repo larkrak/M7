@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+body{
+        padding: 0px;
+        margin: 0px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+nav{
+        margin-left: 30px;
+        width: 50%;
+    }
+    #navegador{
+        list-style: none;display: flex; justify-content: space-around;
+    }
+    #containerTextos{
+        display: flex;
+    }
+    #containerImagenes{
+        width: 100%;display:flex;
+    }
+
+    #navegador li a, ul li a:visited, a{
+        color: black;
+        text-decoration: none;
+    }
+
+    #navegador li {
+        padding: 20px;
+        transition: 0.5s ease all;
+    }
+    #navegador li:hover{
+        box-shadow: 1px 1px 1px 1px rgba(150,150,150,1);
+        cursor: pointer;
+    }
+
+    img{
+        max-height: 500px;
+        margin: auto;
+    }
+
+    footer{
+        background-color: dimgrey;
+        margin-top: 50px;
+    }
+
+    footer ul{
+        list-style: none;
+    }
+
+    footer ul li{
+        padding: 15px;
+    }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+
+        <ul id="navegador">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pagina1.html">Noticias</a></li>
+            <li><a href="pagina2.html">Actualidad</a></li>
+        </ul>
+
+    </nav>
+
+    <p style="margin-left: 30px;margin-top: 50px;font-size: 30px;">Página de ejemplo</p>
+
+    <div style="width: 100%;text-align: center;">
+    <img src="images/christmas-1911637_960_720.webp">
+    </div>
+
+    <footer style="display: flex;justify-content: space-around;">
+
+        <ul>
+            <li>Politica de cookies</li>
+            <li>Atencion al cliente</li>
+            <li>Contacto</li>
+        </ul>
+        <ul>
+            <li>Politica de cookies</li>
+            <li>Atencion al cliente</li>
+            <li>Contacto</li>
+        </ul>
+        <ul>
+            <li>Politica de cookies</li>
+            <li>Atencion al cliente</li>
+            <li>Contacto</li>
+        </ul>
+    
+
+    </footer>
+    
+</body>
+</html>
