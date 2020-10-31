@@ -2,20 +2,14 @@
 
 
 $archivo = fopen("file.txt", "r");
+$arrayLetras = [];
 
 if($archivo == false){
     echo "Error al abrir el archivo";
 }else{
-/*
-    $content = file_get_contents("file.txt");
 
-    $textArray = explode(" ", $content);*/
+    $words = getWords("file.txt");
 
-    $filecontents = file_get_contents('file.txt');
-
-    $words = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
-
-    $arrayLetras = [];
     echo '<div>';
     echo '<table>';
     echo '<tr>';
@@ -23,12 +17,7 @@ if($archivo == false){
     echo '  <th>Number</td>';
     echo '<tr>';
 
-    for ($i=0; $i < count($words); $i++) { 
-        $words[$i][0] = strtolower($words[$i][0]);
-        $arrayLetras[$i] = $words[$i][0];
-    }
-
-    $arrayClean = (array_count_values($arrayLetras));
+    $arrayClean = (array_count_values($words));
 
     $array_keys = array_keys($arrayClean);
     $array_values = array_values($arrayClean);
@@ -44,6 +33,26 @@ if($archivo == false){
     }
     echo '</table>';
     echo '</div>';
+}
+
+
+function getWords(String $rutaArchivo){
+
+    $archivo = fopen($rutaArchivo, "r");
+
+    if($archivo == false){
+        echo "Error al abrir el archivo";
+    }else{
+        $filecontents = file_get_contents($rutaArchivo);
+        $words = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
+    }
+
+    for ($i=0; $i < count($words); $i++) { 
+        $words[$i][0] = strtolower($words[$i][0]);
+        $arrayLetrasLower[$i] = $words[$i][0];
+    }
+
+    return $arrayLetrasLower;
 }
 
 
