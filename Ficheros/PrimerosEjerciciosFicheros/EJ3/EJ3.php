@@ -57,6 +57,7 @@ EOL;
         for($i=0;$i<count($_FILES['file']['name']);$i++){
             echo '<option value="'.($i+1).':'.$_FILES['file']['name'][$i].'">' .$_FILES['file']['name'][$i]. '</option>';
             //echo $_FILES['file']['name'][$i]; 
+            
         }
 echo <<< EOL
             </select>
