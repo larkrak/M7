@@ -9,7 +9,7 @@ nav{
     background: #f8b28a;
     justify-content: space-around;
     font-family: 'Poppins', sans-serif;
-    padding: 50px;
+    padding: 40px;
 }
 
 .logo{
@@ -23,6 +23,7 @@ nav{
     display: flex;
     justify-content: space-around;
     width: 30%;
+    overflow: hidden;
 }
 
 .nav-links li{
@@ -41,7 +42,116 @@ nav{
 }
 
 nav ul li a:hover{
-    background: tomato;
-    border-radius: 5px;
-    color: black;
+    color: rgb(241, 130, 111);
+}
+
+
+/* .middle-content{
+    width: 100%;
+    height: 600px;
+    background-image: url('../images/burguer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* transform: scale(1.1);  
+    filter: blur(8px) grayscale(0.5);
+    border: 1px solid red;
+    transform: scale(1.04);
+}*/
+
+
+.bg-image {
+    /* The image used */
+    background-image: url("../images/burguer.jpg");
+  
+    /* Add the blur effect */
+    filter: blur(8px) grayscale(1);
+    -webkit-filter: blur(8px);
+  
+    /* Full height */
+    height: 500px;
+    margin: auto;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+
+.grayscale.blur{
+    filter: blur(5px) grayscale(0.5);
+}
+
+.bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 600px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bg-text h1 {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 50px;
+}
+
+.bg-text p {
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+i{
+    color: #FF8000;
+}
+
+.opinions{
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.opinions > * {
+    padding: 10px;
+    font-size: 18px;
+}
+
+.trip_opinions{
+    display: grid;
+    grid-gap: 30px;
+    width: 60%;
+    margin: auto;
+    grid-template-columns: auto auto;
+    padding: 10px; 
+}
+
+.trip_opinions > div{
+    background-color: #F5F5F5;
+    border-radius: 3px;
+}
+
+.grid_stars_date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    
+}
+
+.user_opinion{
+    text-align: left;
+}
+
+.user_opinion p{
+    padding: 10px;
+    padding-left: 15px;
 }
