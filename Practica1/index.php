@@ -13,15 +13,7 @@
 
 <div>
 
-    <nav>
-        <div class="logo"><h4>Sunset Burguer</h4></div>
-        <ul class="nav-links">
-            <li><a>Home</a></li>
-            <li><a>Register</a></li>
-            <li><a>Login</a></li>
-        </ul>
-
-    </nav>
+<?php include_once 'nav_headers/login.php' ?>
 
     <div class="bg-image grayscale blur"></div>
 
@@ -117,16 +109,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <div>
-        <h1>footer</h1>
-    </div>
-
-</div>
-
-
-
+    <?php include_once 'nav_headers/footer.php' ?>
 </body>
 </html>
