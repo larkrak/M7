@@ -1,3 +1,5 @@
 username;password;role;name;surname
 user1;pass1;admin;Juan;Garcia
 user2;pass2;staff;Alberto;Medel
+isma;isma;registered;Ismael;Collado
+vis1;vis1;visitor;Visitor;Garcia

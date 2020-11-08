@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_POST['submit'])){
+    echo $_SESSION['id'];
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +22,7 @@
 
 <div>
 
-<?php include_once 'nav_headers/login.php' ?>
+<?php include 'nav_headers/login.php' ?>
 
     <div class="bg-image grayscale blur"></div>
 
@@ -109,6 +118,6 @@
             </div>
         </div>
     </div>
-    <?php include_once 'nav_headers/footer.php' ?>
+    <?php include 'nav_headers/footer.php' ?> 
 </body>
 </html>
