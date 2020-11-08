@@ -6,11 +6,10 @@ $pass_not = false;
 $user_not;
 $user_req = false;
 $pass_req = false;
+$_SESSION['user_valid'] = false;
 
 
 if(isset($_POST['submit'])){
-    
-    $_SESSION['user_valid'] = false;
 
     if (session_id()){
 
@@ -47,6 +46,7 @@ if(isset($_POST['submit'])){
                         $_SESSION['pass'] = $pass_input;
                         $_SESSION['role'] = $checkUser[2];
                         $_SESSION['user_valid'] = true;
+                        $_SESSION['id'] = session_id();
                         $logged = true;
 
                     }
@@ -96,20 +96,16 @@ if(isset($_POST['submit'])){
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'visitor'){
                         echo '<li><a>Day Menu</a></li>';
-                    }
-                    
+                    }  
                 }
             } ?>
-            <li><a>Register</a></li>
-            <?php if(!$logged){
+            <li><a id="register">Register</a></li>
+            <?php if(!($_SESSION['user_valid'])){
                 echo '<li><a id="login">Login</a></li>';
             }else{
                 echo '<li><a id="logout">Logout</a></li>';
                 
-                
             } ?>
-
-            
         </ul>
     </nav>
 
@@ -123,7 +119,7 @@ if(isset($_POST['submit'])){
             <?php 
 
             if(isset($_POST['submit'])){
-                if(!$logged){
+                if(!($_SESSION['user_valid'])){
                     echo '<script type="application/javascript">alert("Datos incorrectos")</script>';
                     if(!$user_req){
                         if($user_input) echo '<label style="font-size:15px;color:red">User incorrect!</label>';
@@ -139,16 +135,14 @@ if(isset($_POST['submit'])){
             <?php 
 
             if(isset($_POST['submit'])){
-                if(!$logged){
+                if(!($_SESSION['user_valid'])){
                     if(!$pass_req){
                         if($pass_not) echo '<label style="font-size:15px;color:red">Password incorrect!</label>';
                     }else{
                         echo '<label style="font-size:15px;color:red">Password required!</label>';
-                    }
-                   
+                    }      
                 } 
             }
-
             ?>
             <input type="submit" name="submit" value="Login">
         </form>

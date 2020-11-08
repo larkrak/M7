@@ -2,7 +2,9 @@
 session_start();
 
 if(isset($_POST['submit'])){
-    echo $_SESSION['id'];
+    if(isset($_SESSION)){
+        echo $_SESSION['id'];
+    }
 }
 
 
@@ -22,7 +24,7 @@ if(isset($_POST['submit'])){
 
 <div>
 
-<?php include 'nav_headers/login.php' ?>
+<?php include 'nav_headers/loginregister.php' ?>
 
     <div class="bg-image grayscale blur"></div>
 
