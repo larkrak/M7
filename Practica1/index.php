@@ -1,10 +1,89 @@
 <?php
-session_start();
 
-if(isset($_POST['submit'])){
-    if(isset($_SESSION)){
-        echo $_SESSION['id'];
+$logged = false;
+$user = false;
+$pass_not = false;
+$user_not;
+$user_req = false;
+$pass_req = false;
+$_SESSION['user_valid'] = false;
+
+var_dump($_SESSION);
+
+//LOGIN
+
+if(isset($_POST['submitL'])){
+    session_start();
+    if (session_id()){
+
+        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
+
+            $user_input = (trim($_POST['user']));  
+            $pass_input = (trim($_POST['pass']));
+
+            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
+
+                if((strlen($user_input)==0)){
+                    $user_req = true;
+                }
+                if((strlen($pass_input)==0)){
+                    $pass_req = true;
+                }
+
+                $logged = false;
+                                    
+            }else {
+
+                //Readin the FILE
+                $cadena = file("./login_files/users.txt");
+
+                for ($i=0; $i < (count($cadena)); $i++) { 
+
+                    $checkUser = $cadena[$i];
+                    
+                    $checkUser = explode(";", $checkUser);
+
+                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
+
+                        $_SESSION['user'] = $user_input;
+                        $_SESSION['pass'] = $pass_input;
+                        $_SESSION['role'] = $checkUser[2];
+                        $_SESSION['user_valid'] = true;
+                        $_SESSION['id'] = session_id();
+                        $logged = true;
+                        
+                    }
+                }
+            }
+        } 
     }
+}
+
+//REGISTER
+
+if(isset($_POST['submitR'])){
+    session_start();
+    if (session_id()){
+
+        if ((filter_has_var(INPUT_POST, 'name')) && (filter_has_var(INPUT_POST, 'surname')) && (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) && (filter_has_var(INPUT_POST, 'confirm_pass'))){
+            $name_input = (trim($_POST['name']));  
+            $surname_input = (trim($_POST['surname']));
+            $user_input = (trim($_POST['user']));
+            $pass_input = (trim($_POST['pass']));
+            $confirm_pass = (trim($_POST['confirm_pass']));
+            var_dump($_SESSION);
+            if($_SESSION['user_valid'] == true){
+                echo "puta";
+            }else{
+                echo "no valid";
+            }
+            //var_dump($_POST);
+        }
+
+    }
+
+
+
 }
 
 

@@ -12,7 +12,7 @@ nav{
     padding: 40px;
 }
 
-.form_div{
+.form_div, .form_div-reg{
     z-index: 2;
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -23,7 +23,7 @@ nav{
     top: 100px;  
 }
 
-.form_div i{
+.form_div i, .form_div-reg i{
     color: rgb(211, 3, 3);
     font-size: 25px;
     height: 22px;
@@ -32,12 +32,12 @@ nav{
     left: 352px;
     transition: 0.3s ease all;
 }
-.form_div i:hover{
+.form_div i:hover, .form_div-reg i:hover{
     color: rgb(148, 5, 5);
     cursor: pointer;
 }
 
-.form_div form{
+.form_div form, .form_div-reg form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -48,12 +48,12 @@ nav{
     outline: 2px solid grey;
 }
 
-.form_div form label{
+.form_div form label, .form_div-reg form label{
     display: block;
     font-size: 18px;
 }
 
-.form_div form input{
+.form_div form input, .form_div-reg form input{
     background-color: #fafaf0;
     border: 1px solid grey;
     margin-top: 10px;

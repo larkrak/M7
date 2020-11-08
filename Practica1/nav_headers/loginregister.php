@@ -1,81 +1,3 @@
-<?php
-
-$logged = false;
-$user = false;
-$pass_not = false;
-$user_not;
-$user_req = false;
-$pass_req = false;
-$_SESSION['user_valid'] = false;
-
-
-if(isset($_POST['submit'])){
-
-    if (session_id()){
-
-        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
-
-            $user_input = (trim($_POST['user']));  
-            $pass_input = (trim($_POST['pass']));
-
-            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
-
-                if((strlen($user_input)==0)){
-                    $user_req = true;
-                }
-                if((strlen($pass_input)==0)){
-                    $pass_req = true;
-                }
-
-                $logged = false;
-                                    
-            }else {
-
-                //Readin the FILE
-                $cadena = file("./login_files/users.txt");
-
-                for ($i=0; $i < (count($cadena)); $i++) { 
-
-                    $checkUser = $cadena[$i];
-                    
-                    $checkUser = explode(";", $checkUser);
-
-                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
-
-                        $_SESSION['user'] = $user_input;
-                        $_SESSION['pass'] = $pass_input;
-                        $_SESSION['role'] = $checkUser[2];
-                        $_SESSION['user_valid'] = true;
-                        $_SESSION['id'] = session_id();
-                        $logged = true;
-
-                    }
-
-                }
-
-
-                // if (($user_input === "a") && ($pass_input === "a")) {  //check values
-                //     $logged = true;
-                //     //header("Location: index.php");  //redirect to application page
-                // }else {  
-                //     if($user_input === "a" && ($pass_input !== "a")){
-                //         $user_not = true;
-                //     }else{
-                //         $pass_not = true;
-                //     }
-                // }
-            }
-        } 
-    }
-
-
-
-}
-
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,13 +14,14 @@ if(isset($_POST['submit'])){
         <div class="logo"><h4>Sunset Burguer</h4></div>
         <ul class="nav-links">
             <li><a>Home</a></li>
-            <?php if(isset($_POST['submit'])){
+            <?php if(isset($_POST['submitL'])){
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'visitor'){
                         echo '<li><a>Day Menu</a></li>';
                     }  
                 }
             } ?>
+
             <li><a id="register">Register</a></li>
             <?php if(!($_SESSION['user_valid'])){
                 echo '<li><a id="login">Login</a></li>';
@@ -118,7 +41,7 @@ if(isset($_POST['submit'])){
             <input type="text" name="user" placeholder="User here...">
             <?php 
 
-            if(isset($_POST['submit'])){
+            if(isset($_POST['submitL'])){
                 if(!($_SESSION['user_valid'])){
                     echo '<script type="application/javascript">alert("Datos incorrectos")</script>';
                     if(!$user_req){
@@ -134,7 +57,7 @@ if(isset($_POST['submit'])){
             <input type="password" name="pass" placeholder="Password here...">
             <?php 
 
-            if(isset($_POST['submit'])){
+            if(isset($_POST['submitL'])){
                 if(!($_SESSION['user_valid'])){
                     if(!$pass_req){
                         if($pass_not) echo '<label style="font-size:15px;color:red">Password incorrect!</label>';
@@ -144,7 +67,23 @@ if(isset($_POST['submit'])){
                 } 
             }
             ?>
-            <input type="submit" name="submit" value="Login">
+            <input type="submit" name="submitL" value="Login">
+        </form>
+
+    </div>
+
+    <div class="form_div-reg">
+        <i class="fas fa-times-circle"></i>
+        <form action="http://localhost/M7/Practica1/index.php" method="post">
+            <label>Your name:</label>
+            <input type="text" name="name" placeholder="Name here...">
+            <input type="text" name="surname" placeholder="Surname here...">
+            <label>Username</label>
+            <input type="text" name="user" placeholder="Username here...">
+            <label>Password</label>
+            <input type="password" name="pass" placeholder="Password here...">
+            <input type="password" name="confirm_pass" placeholder="Confirm password...">
+            <input type="submit" name="submitR" value="Register">
         </form>
 
     </div>
