@@ -71,7 +71,11 @@ if(isset($_POST['submitR'])){
             $user_input = (trim($_POST['user']));
             $pass_input = (trim($_POST['pass']));
             $confirm_pass = (trim($_POST['confirm_pass']));
-            var_dump($_SESSION);
+
+            if(isset($_SESSION)){
+                
+            }
+
             if($_SESSION['user_valid'] == true){
                 echo "puta";
             }else{
