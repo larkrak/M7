@@ -66,10 +66,7 @@ if(isset($_POST['submitL'])){
                         $_SESSION['user_valid'] = true;
                         $_SESSION['id'] = session_id();
                         setcookie('user', $user_input);
-                        $logged = true;
-
-                        var_dump($_SESSION);
-                        
+                        $logged = true;                        
                     }
                 }
             }
