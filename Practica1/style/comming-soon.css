@@ -1,0 +1,153 @@
+*{
+    padding: 0;
+    margin-top: 0;
+    box-sizing: border-box;
+    font-family: 'Varela Round', sans-serif;
+}
+
+body{
+    height: 100vh;
+    background-image: radial-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../images/cs3.jpg);
+}
+
+.inicio{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.inicio a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    transition: 0.3s all;
+    background-color: #8EB2CC;
+    box-shadow: 0 5px 15px -5px #9e9d9d70;
+    position: relative;
+    z-index: 10;
+    
+}
+
+.inicio a:after{
+
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 160%;
+    background-color:rgb(56, 97, 129);
+    transform: rotate(45deg);
+    left: -110%;
+    top:90%;
+    z-index: -1;
+
+}
+
+.inicio a:hover::after{
+    animation: aaa 0.7s 1;
+    top: -20%;
+    left:-10%;
+}
+
+.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.content  > div > a{
+    color: white;
+    text-decoration: none;
+}
+
+p{
+    text-align: center;
+    font-size: 30px;
+}
+
+h1{
+    font-size: 60px;
+    letter-spacing: 5px;
+    margin-bottom: 10pxS;
+    text-align: center;
+}
+
+hr{
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.social{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.social a{
+    color: white;
+    display: inline-block;
+    height: 90px;
+    width: 90px;
+    background-color:#8EB2CC;
+    border-radius: 30%;
+    box-shadow: 0 5px 15px -5px #9e9d9d70;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.social a::before{
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background-color: rgb(56, 97, 129);
+    transform: rotate(45deg);
+    left: -110%;
+    top:90%;
+}
+
+.social a:hover::before{
+    animation: aaa 0.7s 1;
+    top: -10%;
+    left:-10%;
+}
+
+@keyframes aaa{
+    0%{
+        left:-110%;
+        top:90%;
+    }50%{
+        left:10%;
+        top: -30%;
+    }100%{
+        top:-10%;
+        left:-10%;
+    }
+}
+
+
+.social i {
+    font-size: 46px;
+    line-height: 90px;
+    transition: 0.2s linear;
+    width: 100%;
+}
+
+
+.social i:hover {
+    color: #033967;
+    transform: scale(1.3);
+}

@@ -1,3 +1,144 @@
+<?php
+
+$logged = false;
+$user = false;
+$pass_not = false;
+$user_not = false;
+$user_req = false;
+$pass_req = false;
+$_SESSION['user_valid'] = false;
+
+if(isset($_COOKIE['contador']))
+{ 
+  // Caduca en un año 
+  setcookie('contador', $_COOKIE['contador'] + 1, time()+(3600/2)); 
+  $mensaje = 'Número de visitas: ' . $_COOKIE['contador']; 
+} 
+else 
+{ 
+  // Caduca en un año 
+  setcookie('contador', 1, time() + (3600/2)); 
+  $mensaje = 'Bienvenido a nuestra página web'; 
+} 
+
+
+
+//LOGIN
+
+if(isset($_POST['submitL'])){
+    session_start();
+    if (session_id()){
+
+        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
+
+            $user_input = (trim($_POST['user']));  
+            $pass_input = (trim($_POST['pass']));
+
+            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
+
+                if((strlen($user_input)==0)){
+                    $user_req = true;
+                }
+                if((strlen($pass_input)==0)){
+                    $pass_req = true;
+                }
+
+                $logged = false;
+                                    
+            }else {
+
+                //Readin the FILE
+                $cadena = file("./login_files/users.txt");
+
+                for ($i=0; $i < (count($cadena)); $i++) { 
+
+                    $checkUser = $cadena[$i];
+                    
+                    $checkUser = explode(";", $checkUser);
+
+                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
+
+                        $_SESSION['user'] = $user_input;
+                        $_SESSION['pass'] = $pass_input;
+                        $_SESSION['role'] = $checkUser[2];
+                        $_SESSION['name'] = $checkUser[3];
+                        $_SESSION['surname'] = $checkUser[4];
+                        $_SESSION['user_valid'] = true;
+                        $_SESSION['id'] = session_id();
+                        setcookie('user', $user_input);
+                        $logged = true;
+
+                        var_dump($_SESSION);
+                        
+                    }
+                }
+            }
+        } 
+    }
+}
+
+//REGISTER
+
+if(isset($_POST['submitR'])){
+    $regOk = true;
+    $findUser = false;
+    session_start();
+    if (session_id()){
+
+        if ((filter_has_var(INPUT_POST, 'name')) && (filter_has_var(INPUT_POST, 'surname')) && (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) && (filter_has_var(INPUT_POST, 'confirm_pass'))){
+            $name_input = (trim($_POST['name']));  
+            $surname_input = (trim($_POST['surname']));
+            $user_input = (trim($_POST['user']));
+            $pass_input = (trim($_POST['pass']));
+            $confirm_pass = (trim($_POST['confirm_pass']));
+            $role = "registered";
+
+            if(is_numeric($name_input) || is_numeric($surname_input) || strcmp($pass_input, $confirm_pass) !== 0){
+                $regOk = false;
+            }else{
+
+                $file = fopen("./login_files/users.txt", "a+");
+                $cadena = file("./login_files/users.txt");
+
+                for ($i=0; $i < (count($cadena)); $i++) { 
+
+                    $checkUser = $cadena[$i];
+                    
+                    $checkUser = explode(";", $checkUser);
+
+                    if(($checkUser[0] === $user_input)){
+                        $findUser = true;
+                    }
+                }
+
+                if($findUser == false){
+                    
+                    if($file){
+                        fwrite($file, "\n");
+                        $data = sprintf("%s;%s;%s;%s;%s", $user_input, $pass_input, $role, $name_input, $surname_input);
+                        file_put_contents('./login_files/users.txt', $data, FILE_APPEND);
+
+                    }else{
+                        echo "Failed to read users!!";
+                    }
+
+                }else{
+                    echo '<script type="application/javascript">alert("User already in use")</script>';
+                }
+
+
+            }
+
+        }
+
+    }
+
+
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +155,30 @@
         <div class="logo"><h4>Sunset Burguer</h4></div>
         <ul class="nav-links">
             <li><a>Home</a></li>
+            <li><a>Day Menu</a></li>
             <?php if(isset($_POST['submitL'])){
                 if(isset($_SESSION['role'])){
-                    if($_SESSION['role'] == 'visitor'){
-                        echo '<li><a>Day Menu</a></li>';
-                    }  
+                    if($_SESSION['role'] == 'registered'){
+                        echo '<li><a>View Menus</a></li>';
+                    }
+                    if($_SESSION['role'] == 'staff'){
+                        echo '<li><a>Administrate menus</a></li>';
+                    } 
+                    if($_SESSION['role'] == 'admin'){
+                        echo '<li><a href="nav_headers/comming-soon.php">Administrate users</a></li>';
+                    } 
                 }
-            } ?>
+            }else{
+                echo '<li><a id="register">Register</a></li>';
+            }
+            
+            ?>
 
-            <li><a id="register">Register</a></li>
-            <?php if(!($_SESSION['user_valid'])){
+            <!-- <li><a id="register">Register</a></li> -->
+            <?php if(!($logged)){
                 echo '<li><a id="login">Login</a></li>';
             }else{
-                echo '<li><a id="logout">Logout</a></li>';
+                echo '<li><a href="nav_headers/logout.php" id="logout">Logout</a></li>';
                 
             } ?>
         </ul>
@@ -42,7 +194,7 @@
             <?php 
 
             if(isset($_POST['submitL'])){
-                if(!($_SESSION['user_valid'])){
+                if(!($logged)){
                     echo '<script type="application/javascript">alert("Datos incorrectos")</script>';
                     if(!$user_req){
                         if($user_input) echo '<label style="font-size:15px;color:red">User incorrect!</label>';
@@ -58,7 +210,7 @@
             <?php 
 
             if(isset($_POST['submitL'])){
-                if(!($_SESSION['user_valid'])){
+                if(!($logged)){
                     if(!$pass_req){
                         if($pass_not) echo '<label style="font-size:15px;color:red">Password incorrect!</label>';
                     }else{
