@@ -74,10 +74,10 @@ nav{
     font-size: 20px;
 }
 
+
 .nav-links{
     display: flex;
     justify-content: space-around;
-    width: 30%;
     overflow: hidden;
 }
 
@@ -156,10 +156,14 @@ nav ul li a:hover{
     font-family: 'Roboto', sans-serif;
 }
 
-.bg-text h1, .bg-text-user h1 {
+.bg-text h1 {
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 50px;
+}
+
+.bg-text-user h1 {
+    font-size: 30px;
 }
 
 .bg-text p, .bg-text-user p {

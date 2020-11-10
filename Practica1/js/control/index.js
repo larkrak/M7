@@ -5,6 +5,8 @@ window.onload = function(){
         divLogin = document.getElementsByClassName("form_div")[0];
         divRegister = document.getElementsByClassName("form_div-reg")[0];
 
+        console.log(divRegister)
+
         divLogin.style.display = "none";
         divRegister.style.display = "none";
         
