@@ -1,0 +1,26 @@
+01;appetiser;Ensalada
+01;firstcourse;Sopa 
+01;maincourse;Estofado
+01;dessert;Flan de huevos
+05;appetiser;Ensalada
+01;drink;Fanta
+02;appetiser;Croquetas
+02;firstcourse;Pizza 
+02;maincourse;Sopa 
+02;dessert;Tarta de Queso
+05;maincourse;Estofado
+05;dessert;Tarda de nata
+05;drink;Semen de caballo
+02;drink;CocaCola
+03;appetiser;Ensalada
+03;firstcourse;Gambas al ajillo 
+03;maincourse;Estofado
+03;dessert;Flan de oreo
+03;appetiser;Sprite
+04;appetiser;Ensalada Cesar
+04;firstcourse;Rollitos de primavera 
+04;maincourse;Estofado
+04;dessert;Flan de huevos
+04;appetiser;Fanta
+05;firstcourse;Albondigas de la casa 
+

@@ -1,4 +1,3 @@
-window.onload = function(){
 
     $(document).ready(function () {
 
@@ -53,4 +52,3 @@ window.onload = function(){
 
     });
 
-}

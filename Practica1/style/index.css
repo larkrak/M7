@@ -70,8 +70,19 @@ nav{
 .logo{
     color: white;
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     font-size: 20px;
+}
+
+.logo a{
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    color: white;
+}
+
+.logo a:hover{
+    color: rgb(241, 130, 111);
 }
 
 
@@ -87,7 +98,7 @@ nav{
 
 .nav-links a{
     text-decoration: none;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     font-weight: bold;
     font-size: 14px;
     padding: 10px;
@@ -123,7 +134,7 @@ nav ul li a:hover{
     -webkit-filter: blur(8px);
   
     /* Full height */
-    height: 500px;
+    height: 550px;
     margin: auto;
   
     /* Center and scale the image nicely */
@@ -141,7 +152,7 @@ nav ul li a:hover{
 
 .bg-text {
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    background-color: rgba(0,0,0, 0.8); /* Black w/opacity/see-through */
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
