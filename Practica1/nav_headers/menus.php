@@ -62,45 +62,39 @@ if(isset($_POST['submitL'])){
 }
 
 
-function getCategories($path){
+$menus = file("../files/menus.txt");
 
-    $categories = file_get_contents($path."/categories.txt");
-    $categoriesArray = explode(";", $categories);
+//var_dump($menus);
+$arrAp = [];
+$arrF = [];
+$arrM = [];
+$arrD = [];
+$arrDr = [];
 
-    return $categoriesArray;
 
-}
+for ($i=0; $i < count($menus); $i++) { 
+    $linea = explode(";", $menus[$i]);
+    //var_dump($linea);
 
-function getDayMenu($path){
-
-    $dayMenus = file($path."/daymenu.txt");
-    //$categories = file_get_contents($path."/categories.txt");
-    $numDia = date("w");
-    $categoryCorrect = true;
-
-    //$categoriesArray = explode(";", $categories);
-
-    $categoriesArray = getCategories($path);
-
-    for ($i=0; $i < (count($dayMenus)); $i++){
-
-        $menu = explode(";", $dayMenus[$i]);
-        
-        $id = substr($menu[0], -1);
-
-        if($id == $numDia){
-
-            if(!in_array($menu[1], $categoriesArray)){
-                $categoryCorrect = false;
-            }
-            if( $categoryCorrect == true) $arrayMenu[$menu[1]] = $menu[2];
-        }
+    if($linea[1] == 'appetiser'){
+        array_push($arrAp, $linea[2], $linea[3]);
     }
-    return $arrayMenu;
+    if($linea[1] == 'firstcourse'){
+        array_push($arrF, $linea[2], $linea[3]);
+    }
+    if($linea[1] == 'maincourse'){
+        array_push($arrM, $linea[2], $linea[3]);
+    }
+    if($linea[1] == 'dessert'){
+        array_push($arrD, $linea[2], $linea[3]);
+    }
+    if($linea[1] == 'drink'){
+        array_push($arrDr, $linea[2], $linea[3]);
+    }
+
+    //$arrayMenu[$linea[1]] = $linea[2];
 }
 
-$categoriesArray = getCategories("../files");
-$arrayMenu = getDayMenu("../files");
 
 ?>
 
@@ -110,7 +104,7 @@ $arrayMenu = getDayMenu("../files");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/index.css">
-    <link rel="stylesheet" href="../style/daymenu.css">
+    <link rel="stylesheet" href="../style/menus.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/control/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
@@ -124,18 +118,18 @@ $arrayMenu = getDayMenu("../files");
         <div class="logo"><h4>Sunset Burguer</h4></div>
         <ul class="nav-links">
             <li><a href="../index.php">Home</a></li>
-            <li><a href="#">Day Menu</a></li>
+            <li><a href="daymenu.php">Day Menu</a></li>
             <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'registered'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
+                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
                     }
                     if($_SESSION['role'] == 'staff'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
+                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
                         echo '<li><a href="comming-soon.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
+                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
                         echo '<li><a href="comming-soon.php">Administrate menus</a></li>';
                         echo '<li><a href="comming-soon.php">Administrate users</a></li>';
                     } 
@@ -211,18 +205,71 @@ $arrayMenu = getDayMenu("../files");
 
     <div class="bg-image grayscale blur"></div>
 
-    <div class="daymenutext">
-      <h1>Day menu </h1>
-      <?php 
-      if(count($arrayMenu) == 5){
-        for ($i=0; $i < count($arrayMenu); $i++) { 
-            echo '<h3 style="text-transform:uppercase">'.$categoriesArray[$i].'</h3>';
-            echo '<h5 style="padding:20px">'.$arrayMenu[$categoriesArray[$i]].'</h5>';
-        }
-      }else{
-        echo '<h3 style="text-transform:uppercase;text-align:center;padding:20px">Sorry, we had some problem with the menu!</h3>';
-      }
-      ?>
+    <div class="menustext">
+        <h1>Menus</h1>
+
+        <div style="display: flex;flex-direction: row;">
+            <div>
+                <h2>Appetiser</h2>
+
+                <?php
+                    for ($i=0; $i < count($arrAp) ; $i++) { 
+                        echo '<div class="plato"><h4>'.$arrAp[$i].'</h4><h4>'.$arrAp[$i+1].'</h4></div>'; 
+                        $i++;   
+                    }
+
+                ?>
+            </div>
+            <div>
+                <h2>First</h2>
+
+                <?php
+
+                    for ($i=0; $i < count($arrF) ; $i++) { 
+                        echo '<div class="plato"><h4>'.$arrF[$i].'</h4><h4>'.$arrF[$i+1].'</h4></div>'; 
+                        $i++;   
+                    }
+
+                ?>
+            </div>
+            <div>
+                <h2>Main</h2>
+
+                <?php
+
+                    for ($i=0; $i < count($arrM) ; $i++) { 
+                        echo '<div class="plato"><h4>'.$arrM[$i].'</h4><h4>'.$arrM[$i+1].'</h4></div>'; 
+                        $i++;   
+                    }
+
+                ?>
+            </div>
+            <div>
+                <h2>Dessert</h2>
+
+                <?php
+
+                    for ($i=0; $i < count($arrD) ; $i++) { 
+                        echo '<div class="plato"><h4>'.$arrD[$i].'</h4><h4>'.$arrD[$i+1].'</h4></div>'; 
+                        $i++;   
+                    }
+
+                ?>
+            </div>
+            <div>
+                <h2>Drink</h2>
+
+                <?php
+
+                    for ($i=0; $i < count($arrDr) ; $i++) { 
+                        echo '<div class="plato"><h4>'.$arrDr[$i].'</h4><h4>'.$arrDr[$i+1].'</h4></div>'; 
+                        $i++;   
+                    }
+
+                ?>
+            </div>
+        </div>
+
     </div>
     <div class="opinions">
         <h2>Opinions</h2>

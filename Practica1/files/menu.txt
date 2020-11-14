@@ -1,5 +1,0 @@
-01;appetiser;Gambas al ajillo;120
-02;firstcourse;Costillas de niño;432
-03;maincourse;Caldo de verduras;12,5
-04;dessert;Flan de queso;4,5
-05;drink;Cocacola;2,50

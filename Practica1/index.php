@@ -153,14 +153,14 @@ if(isset($_POST['submitR'])){
             <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'registered'){
-                        echo '<li><a href="nav_headers/comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="nav_headers/menus.php">View Menus</a></li>';
                     }
                     if($_SESSION['role'] == 'staff'){
-                        echo '<li><a href="nav_headers/comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="nav_headers/menus.php">View Menus</a></li>';
                         echo '<li><a href="nav_headers/comming-soon.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
-                        echo '<li><a href="nav_headers/comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="nav_headers/menus.php">View Menus</a></li>';
                         echo '<li><a href="nav_headers/comming-soon.php">Administrate menus</a></li>';
                         echo '<li><a href="nav_headers/comming-soon.php">Administrate users</a></li>';
                     } 

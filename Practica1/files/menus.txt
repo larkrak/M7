@@ -1,0 +1,30 @@
+01;appetiser;Gambas al ajillo;120
+02;firstcourse;Costillas de niño;432
+03;maincourse;Caldo de verduras;12,5
+04;dessert;Flan de queso;4,5
+05;drink;Cocacola;2,50
+06;appetiser;Ensalada;13
+07;firstcourse;Sopa;9,5
+08;maincourse;Estofado;5
+09;dessert;Flan de huevos;7
+10;appetiser;Ensalada de marisco;7,90
+11;drink;Fanta;2,43
+12;appetiser;Croquetas;56,8
+13;firstcourse;Pizza;23,4
+14;maincourse;Sopa;21
+15;dessert;Tarta de Queso;2
+16;maincourse;Estofado;34,5
+17;dessert;Tarda de nata;23
+18;drink;Semen de caballo;19,90
+19;drink;CocaCola;9,90
+20;appetiser;Ensalada;4,67
+21;firstcourse;Gambas al ajillo;12 
+22;maincourse;Estofado;9
+23;dessert;Flan de oreo;10
+24;appetiser;Sprite;11
+25;appetiser;Ensalada Cesar;5,50
+26;firstcourse;Rollitos de primavera;6,70 
+27;maincourse;Estofado;90
+28;dessert;Flan de huevos:35,89
+29;appetiser;Fanta;56,4
+30;firstcourse;Albondigas de la casa;20,03 

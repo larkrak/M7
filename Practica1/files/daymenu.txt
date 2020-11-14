@@ -10,7 +10,7 @@
 02;dessert;Tarta de Queso
 05;maincourse;Estofado
 05;dessert;Tarda de nata
-05;drink;Semen de caballo
+05;drink;RedBull
 02;drink;CocaCola
 03;appetiser;Ensalada
 03;firstcourse;Gambas al ajillo 
