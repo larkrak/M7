@@ -121,7 +121,7 @@ $arrayMenu = getDayMenu("../files");
 <body>
 
 <nav>
-        <div class="logo"><h4>Sunset Burguer</h4></div>
+        <div class="logo"><h4><a href="index.php">Sunset Burguer</a></h4><?php if(isset($_SESSION['name'])) echo "<h3>".$_SESSION['name']." ".$_SESSION['surname']."</h3>" ?></div>
         <ul class="nav-links">
             <li><a href="../index.php">Home</a></li>
             <li><a href="#">Day Menu</a></li>
