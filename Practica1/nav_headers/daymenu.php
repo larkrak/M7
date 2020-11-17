@@ -9,6 +9,11 @@ $user_not = false;
 $user_req = false;
 $pass_req = false;
 
+if (!isset($_SESSION['user_valid'])) {
+    header("Location: ../index.php");
+    exit;
+}
+
 if(isset($_POST['submitL'])){
     
     if (session_id()){
@@ -132,7 +137,7 @@ $arrayMenu = getDayMenu("../files");
                     }
                     if($_SESSION['role'] == 'staff'){
                         echo '<li><a href="menus.php">View Menus</a></li>';
-                        echo '<li><a href="comming-soon.php">Administrate menus</a></li>';
+                        echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
                         echo '<li><a href="menus.php">View Menus</a></li>';

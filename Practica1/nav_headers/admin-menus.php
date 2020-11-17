@@ -1,13 +1,6 @@
 <?php session_start() ?>
 
 <?php 
-error_reporting(0);
-$logged = false;
-$user = false;
-$pass_not = false;
-$user_not = false;
-$user_req = false;
-$pass_req = false;
 
 if (!isset($_SESSION['user_valid'])) {
     header("Location: ../index.php");
@@ -67,36 +60,6 @@ if(isset($_POST['submitL'])){
 }
 
 
-$menus = file("../files/menus.txt");
-
-$arrAp = [];
-$arrF = [];
-$arrM = [];
-$arrD = [];
-$arrDr = [];
-
-
-for ($i=0; $i < count($menus); $i++) { 
-    $linea = explode(";", $menus[$i]);
-
-    if($linea[1] == 'appetiser'){
-        array_push($arrAp, $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'firstcourse'){
-        array_push($arrF, $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'maincourse'){
-        array_push($arrM, $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'dessert'){
-        array_push($arrD, $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'drink'){
-        array_push($arrDr, $linea[2], $linea[3]);
-    }
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +68,7 @@ for ($i=0; $i < count($menus); $i++) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/index.css">
-    <link rel="stylesheet" href="../style/menus.css">
+    <link rel="stylesheet" href="../style/admin-menus.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/control/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
@@ -204,73 +167,9 @@ for ($i=0; $i < count($menus); $i++) {
 
     </div>
 
-    <div class="bg-image grayscale blur"></div>
+    <!-- <div class="bg-image grayscale blur"></div> -->
 
-    <div class="menustext">
-        <h1>Menus</h1>
-
-        <div style="display: flex;flex-direction: row;">
-            <div>
-                <h2>Appetiser</h2>
-
-                <?php
-                    for ($i=0; $i < count($arrAp) ; $i+=2) { 
-                        echo '<div class="plato"><h4>'.$arrAp[$i].'</h4><h4>'.$arrAp[$i+1].'</h4></div>'; 
- 
-                    }
-
-                ?>
-            </div>
-            <div>
-                <h2>First</h2>
-
-                <?php
-
-                    for ($i=0; $i < count($arrF) ; $i+=2) { 
-                        echo '<div class="plato"><h4>'.$arrF[$i].'</h4><h4>'.$arrF[$i+1].'</h4></div>'; 
-                           
-                    }
-
-                ?>
-            </div>
-            <div>
-                <h2>Main</h2>
-
-                <?php
-
-                    for ($i=0; $i < count($arrM) ; $i+=2) { 
-                        echo '<div class="plato"><h4>'.$arrM[$i].'</h4><h4>'.$arrM[$i+1].'</h4></div>'; 
-                    }
-
-                ?>
-            </div>
-            <div>
-                <h2>Dessert</h2>
-
-                <?php
-
-                    for ($i=0; $i < count($arrD) ; $i+=2) { 
-                        echo '<div class="plato"><h4>'.$arrD[$i].'</h4><h4>'.$arrD[$i+1].'</h4></div>'; 
-                    }
-
-                ?>
-            </div>
-            <div>
-                <h2>Drink</h2>
-
-                <?php
-
-                    for ($i=0; $i < count($arrDr) ; $i+=2) { 
-                        echo '<div class="plato"><h4>'.$arrDr[$i].'</h4><h4>'.$arrDr[$i+1].'</h4></div>'; 
-                           
-                    }
-
-                ?>
-            </div>
-        </div>
-
-    </div>
-    <div class="opinions">
+    <!-- <div class="opinions">
         <h2>Opinions</h2>
         <div>
             <i class="fas fa-star"></i>
@@ -356,6 +255,44 @@ for ($i=0; $i < count($menus); $i++) {
                 </div>
             </div>
         </div>
+    </div> -->
+
+
+    <div id="menu-content">
+
+            <table>
+                <th>ID</th>
+                <th>CATEGORY</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>Selection</th>
+                <!-- <tr>
+                    <td>asd</td>
+                    <td>aaa</td>
+                    <td>ssss</td>
+                    <td>ssss</td>
+                </tr> -->
+
+                <?php 
+
+                    $menus = file("../files/menus.txt");
+                    $orden = [];
+                    $arr = [];
+
+                    //Leo el fichero para conseguir sus indices y mas adelante ordenarlos
+                    for ($i=0; $i < count($menus) ; $i++) { 
+                        $linea = explode(";", $menus[$i]);
+                        array_push($orden, $linea[0]);
+                    }
+
+
+
+                ?>
+            </table>
+
+
+
+
     </div>
 
     <?php include 'footer.php' ?> 

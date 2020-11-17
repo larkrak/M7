@@ -1,0 +1,21 @@
+#menu-content table{
+    border-collapse: collapse;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    margin: auto;
+}
+
+#menu-content table tr:nth-child(odd){
+    background-color:#dbdbdb;
+}
+
+#menu-content table th{
+    background-color: #757575;
+}
+
+#menu-content table th, #menu-content table td{
+    text-align: left;
+    padding: 20px;
+    
+}

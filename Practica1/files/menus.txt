@@ -3,10 +3,10 @@
 03;maincourse;Caldo de verduras;12,5
 04;dessert;Flan de queso;4,5
 05;drink;Cocacola;2,50
+09;dessert;Flan de huevos;7
 06;appetiser;Ensalada;13
 07;firstcourse;Sopa;9,5
 08;maincourse;Estofado;5
-09;dessert;Flan de huevos;7
 10;appetiser;Ensalada de marisco;7,90
 11;drink;Fanta;2,43
 12;appetiser;Croquetas;56,8
@@ -25,6 +25,6 @@
 25;appetiser;Ensalada Cesar;5,50
 26;firstcourse;Rollitos de primavera;6,70 
 27;maincourse;Estofado;90
-28;dessert;Flan de huevos:35,89
+28;dessert;Flan de huevos;35,89
 29;appetiser;Fanta;56,4
 30;firstcourse;Albondigas de la casa;20,03 
