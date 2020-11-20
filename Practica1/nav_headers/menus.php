@@ -66,7 +66,6 @@ if(isset($_POST['submitL'])){
     }
 }
 
-
 $menus = file("../files/menus.txt");
 
 $arrAp = [];

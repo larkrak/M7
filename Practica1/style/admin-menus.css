@@ -1,9 +1,13 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 #menu-content table{
     border-collapse: collapse;
     border: 1px solid lightgrey;
     border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
     margin: auto;
+    width: 50%;
 }
 
 #menu-content table tr:nth-child(odd){
@@ -15,7 +19,52 @@
 }
 
 #menu-content table th, #menu-content table td{
-    text-align: left;
+    text-align: center;
     padding: 20px;
     
+}
+
+#newvalues input{
+    width: 100%;
+    background-color: rgba(180, 180, 180, 0.815);
+}
+
+#newvalues input:read-only{
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+table input{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+
+#modificar{
+    background-color: darkcyan;
+}
+
+#eliminar{
+    background-color: rgba(255, 53, 53, 0.699);
+}
+#nuevo{
+    background-color: orange;
+}
+
+#menu-content h2{
+    text-align: center;
+}
+#modificar:hover{
+    background-color: rgba(0, 139, 139, 0.637);
+    cursor: pointer;
+}
+
+#eliminar:hover{
+    background-color: rgba(255, 53, 53, 0.473);
+    cursor: pointer;
+}
+#nuevo:hover{
+    background-color: rgba(255, 166, 0, 0.61);
+    cursor: pointer;
 }

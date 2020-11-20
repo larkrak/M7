@@ -1,116 +1,37 @@
 <?php session_start() ?>
+<?php
 
-<?php 
+function getLine($radio){
+    $menus = file("../files/menus.txt");
+    $ret = [];
 
-if (!isset($_SESSION['user_valid'])) {
-    header("Location: ../index.php");
-    exit;
-}
-
-if(isset($_POST['submitL'])){
+    for ($i=0; $i < count($menus); $i++) { 
+        $linea = explode(";", $menus[$i]);
     
-    if (session_id()){
-
-        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
-
-            $user_input = (trim($_POST['user']));  
-            $pass_input = (trim($_POST['pass']));
-
-            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
-
-                if((strlen($user_input)==0)){
-                    $user_req = true;
-                }
-                if((strlen($pass_input)==0)){
-                    $pass_req = true;
-                }
-                session_unset();
-                session_destroy();
-
-                header("Location:../index.php");
-                $logged = false;
-                                    
-            }else {
-
-                //Readin the FILE
-                $cadena = file("../files/users.txt");
-                
-                for ($i=0; $i < (count($cadena)); $i++) { 
-
-                    $checkUser = $cadena[$i];
-                    
-                    $checkUser = explode(";", $checkUser);
-
-                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
-
-                        $_SESSION['user'] = $user_input;
-                        $_SESSION['pass'] = $pass_input;
-                        $_SESSION['role'] = $checkUser[2];
-                        $_SESSION['name'] = $checkUser[3];
-                        $_SESSION['surname'] = $checkUser[4];
-                        $_SESSION['user_valid'] = true;
-                        $_SESSION['id'] = session_id();
-                        setcookie('user', $user_input);
-                        $logged = true;                        
-                    }
-                }
-            }
-        } 
+        if($linea[0] == $radio){
+            $ret = $linea;
+        }   
     }
+    return $ret;
 }
 
-#Lectura del menu, per categoria.
-
-$menus = file("../files/menus.txt");
-
-$arrAp = [];
-$arrF = [];
-$arrM = [];
-$arrD = [];
-$arrDr = [];
 
 
-for ($i=0; $i < count($menus); $i++) { 
-    $linea = explode(";", $menus[$i]);
 
-    if($linea[1] == 'appetiser'){
-        array_push($arrAp, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'firstcourse'){
-        array_push($arrF, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'maincourse'){
-        array_push($arrM, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'dessert'){
-        array_push($arrD, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'drink'){
-        array_push($arrDr, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-}
 
-function printArrInTable($arr){
-    $cont = 0;
-    for ($i=0; $i < count($arr) ; $i++) { 
+if(isset($_POST)){
 
-        if($cont == 0){
-            echo '<tr>';
-            $idRadio = $arr[$i];
+    if(isset($_POST['modificar']) || isset($_POST['eliminar'])){
+
+        if(isset($_POST['selection'])){
+            $radioClicked = $_POST['selection'];
         }
 
-        
-        
-        echo '<td>'.$arr[$i].'</td>'; 
-
-        $cont++;
-        if($cont == 4){
-            echo '<td style="text-align:center"><input value="'.$idRadio.'" name="selection" type="radio"></td>';
-            echo '</tr>';
-            $cont = 0;
-        }
     }
+
 }
+
+
 
 
 ?>
@@ -220,43 +141,52 @@ function printArrInTable($arr){
 
     </div>
 
+    <?php if(isset($_POST['modificar'])){
     
+    ?>
 
-
-    <div id="menu-content">
-            <form action="edit-file.php" method="POST">
-                <table>
-                    <th>ID</th>
-                    <th>CATEGORY</th>
-                    <th>NAME</th>
-                    <th>PRICE</th>
-                    <th>Selection</th>
-                    
+        <div id="menu-content">
+            <h2>Item clicked:</h2>
+            <table>
+                <th>ID</th>
+                <th>CATEGORY</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <tr>
                     <?php 
+                        for ($i=0; $i < count(getLine($radioClicked)); $i++) { 
+                            echo '<td>'.getLine($radioClicked)[$i].'</td>';
+                        }
 
-                    printArrInTable($arrAp);
-                    printArrInTable($arrF);
-                    printArrInTable($arrM);
-                    printArrInTable($arrD);
-                    printArrInTable($arrDr);
-
+                    
                     ?>
-                    </tr>
-                </table>
+                </tr>
+            </table>
 
-                <table id="botones">
-                    <tr>
-                        <td><input type="submit" name="modificar" id="modificar" value="Modificar seleccionado"></input></td>
-                        <td><input type="submit" name="eliminar" id="eliminar" value="Eliminar seleccionado"></input></td>
-                        <td><input type="submit" name="nuevo" id="nuevo" value="Añadir nuevo elemento"></input></td>
-                    </tr>
-                </table>
-            </form>
+            <h2>New values:</h2>
+            <table id="newvalues">
+                <th>ID</th>
+                <th>CATEGORY</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <tr>
+                    <td><input type="text" readonly value="<?php echo getLine($radioClicked)[0]; ?>"></td>
+                    <td><input type="text" value="<?php echo getLine($radioClicked)[1]; ?>"></td>
+                    <td><input type="text" value="<?php echo getLine($radioClicked)[2]; ?>"></td>
+                    <td><input type="text" value="<?php echo getLine($radioClicked)[3]; ?>"></td>
+                </tr>
+            </table>
 
+            <table id="botones">
+                <tr>
+                    <td><input type="submit" name="modificar" id="modificar" value="Aceptar cambios"></input></td>
+                </tr>
+            </table>
 
-
-    </div>
-
+        </div>
+        <?php
+                    }
+        ?>
     <?php include 'footer.php' ?> 
     
 </body>
