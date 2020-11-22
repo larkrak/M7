@@ -56,15 +56,104 @@ table input{
     text-align: center;
 }
 #modificar:hover{
-    background-color: rgba(0, 139, 139, 0.637);
+    background-color: rgba(0, 139, 139, 0.801);
+    color: white;
     cursor: pointer;
 }
 
 #eliminar:hover{
     background-color: rgba(255, 53, 53, 0.473);
+    color: white;
     cursor: pointer;
 }
 #nuevo:hover{
     background-color: rgba(255, 166, 0, 0.61);
+    color: white;
     cursor: pointer;
+}
+
+table select{
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: rgba(180, 180, 180, 0.815);
+}
+
+#form{
+    width: 50%;
+    margin: auto;
+}
+
+#form label{
+    width: 100px;
+    text-align: left;
+    padding: 10px;
+}
+
+#form div{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#form div input, #form div select{
+    width: 200px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    margin: 2px;
+    background-color: rgba(180, 180, 180, 0.815);
+}
+
+#botones{
+    margin-top: 10px !important;
+}
+
+h2 i.fa-times-circle{
+    color: red;
+}
+
+h2 i.fa-check-circle{
+    color: green;
+}
+
+#back, #eliminar_txt{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+#back input{
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80px;
+    text-align: center;
+    background-color: darkcyan;
+}
+
+#eliminar_txt input{
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80px;
+    text-align: center;
+    background-color: rgba(255, 53, 53, 0.699);
+
+}
+
+#eliminar_txt input:hover{
+    background-color: rgba(255, 53, 53, 0.473);
+    cursor: pointer;
+    color: white;
+}
+
+#back input:hover{
+    background-color: rgba(0, 139, 139, 0.801);
+    cursor: pointer;
+    color: white;
 }

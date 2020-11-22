@@ -1,6 +1,8 @@
 <?php session_start() ?>
 <?php
 
+error_reporting(0);
+
 function getLine($radio){
     $menus = file("../files/menus.txt");
     $ret = [];
@@ -26,9 +28,7 @@ if(isset($_POST)){
         if(isset($_POST['selection'])){
             $radioClicked = $_POST['selection'];
         }
-
     }
-
 }
 
 
@@ -141,8 +141,12 @@ if(isset($_POST)){
 
     </div>
 
-    <?php if(isset($_POST['modificar'])){
-    
+    <?php 
+    if(isset($_POST['selection'])){
+    ?>
+
+    <?php 
+        if(isset($_POST['modificar'])){
     ?>
 
         <div id="menu-content">
@@ -155,38 +159,140 @@ if(isset($_POST)){
                 <tr>
                     <?php 
                         for ($i=0; $i < count(getLine($radioClicked)); $i++) { 
-                            echo '<td>'.getLine($radioClicked)[$i].'</td>';
+                            echo '<td id=td"'.$i.'">'.getLine($radioClicked)[$i].'</td>';
                         }
-
-                    
                     ?>
                 </tr>
             </table>
 
             <h2>New values:</h2>
-            <table id="newvalues">
-                <th>ID</th>
-                <th>CATEGORY</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <tr>
-                    <td><input type="text" readonly value="<?php echo getLine($radioClicked)[0]; ?>"></td>
-                    <td><input type="text" value="<?php echo getLine($radioClicked)[1]; ?>"></td>
-                    <td><input type="text" value="<?php echo getLine($radioClicked)[2]; ?>"></td>
-                    <td><input type="text" value="<?php echo getLine($radioClicked)[3]; ?>"></td>
-                </tr>
-            </table>
+            <form action="#" method="POST">
+                <div id="form">
+                    <div>
+                        <label>ID:</label>
+                        <input name="id_plato" type="text" readonly value="<?php echo getLine($radioClicked)[0]; ?>">
+                    </div>
+                    <div>
+                        <label>Category:</label>
+                        <select name="category_plato" type="text" value="">
+                        <?php
+                            $file = file("../files/categories.txt");
+                            $categorias = explode(";", $file[0]);
+                            for ($i=0; $i < count($categorias) ; $i++) { 
+                                echo '<option>'.$categorias[$i].'</option>';
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Name:</label>
+                        <input name="nombre_plato" type="text" placeholder="Nuevo nombre" placeholder="New name here">
+                    </div>
+                    <div>
+                        <label>Price:</label>
+                        <input name="precio_plato" type="text" placeholder="Nuevo precio" placeholder="New price here">
+                    </div>
 
-            <table id="botones">
-                <tr>
-                    <td><input type="submit" name="modificar" id="modificar" value="Aceptar cambios"></input></td>
-                </tr>
-            </table>
+                </div>
 
+                <table id="botones">
+                    <tr>
+                        <td><input type="submit" name="modificar_txt" id="modificar" value="Aceptar cambios"></input></td>
+                    </tr>
+                </table>
+
+            </form>
         </div>
-        <?php
+
+        <?php }if(isset($_POST['eliminar'])){ 
+
+
+                $file = file("../files/menus.txt");
+
+                for ($i=0; $i < count($file) ; $i++) { 
+                    
+                    for ($j=0; $j < strlen($file[$i]) ; $j++) { 
+                        $plato = explode(";", $file[$i]);
+                        if($plato[0] == $_POST['id_plato']){
+                            $linea_fichero = $i+1;
+                            break;
+                        }
                     }
+                }
+                $file[($linea_fichero)-1] = "\n";
+                if(file_put_contents("../files/menus.txt", $file)){
+                    echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Change made successfully</h2>';
+                }
+                
+
+                echo "
+                <div id='back'>
+                    <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
+                </div>";
+
+                    
+
+        }
+
         ?>
+        <?php
+            }
+
+
+                
+                if(isset($_POST['modificar_txt'])){
+                    if(!is_nan($_POST['precio_plato']) || is_string($_POST['nombre_plato'])){
+
+                        $file = file("../files/menus.txt");
+
+                        for ($i=0; $i < count($file) ; $i++) { 
+                            
+                            for ($j=0; $j < strlen($file[$i]) ; $j++) { 
+                                $plato = explode(";", $file[$i]);
+                                if($plato[0] == $_POST['id_plato']){
+                                    
+                                    $linea_fichero = $i+1;
+                                    $plato[0] = $_POST['id_plato'];
+                                    $plato[1] = $_POST['category_plato'];
+                                    $plato[2] = $_POST['nombre_plato'];
+                                    $plato[3] = $_POST['precio_plato'];
+                                    break;
+                                }
+                            }
+                        }
+                        $file[($linea_fichero)-1] = $_POST['id_plato'].";". $_POST['category_plato'].";".$_POST['nombre_plato'].";". $_POST['precio_plato']."\n";
+                        if(file_put_contents("../files/menus.txt", $file)){
+                            echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Change made successfully</h2>';
+                        }
+                    }else{
+                        if(is_nan($_POST['precio_plato']) || !is_string($_POST['nombre_plato'])){
+                            echo '<h2 style="text-align:center;margin-top:30px;margin-top:30px">Invalid parameters found:</h2>';
+                            if(is_nan($_POST['precio_plato'])){
+                                echo "<h2>Precio introducido: ".$_POST['precio_plato'] ."<i class='far fa-times-circle'></i></h2>" ;
+                            }else{
+                                echo "<h2>Precio introducido: ".$_POST['precio_plato'] ."<i class='far fa-check-circle'></i></h2>" ;
+                            }
+
+                            if(!is_string($_POST['nombre_plato'])){
+                                if(!is_string($_POST['nombre_plato'])){
+                                    echo "<h2>Nombre introducido: ".$_POST['nombre_plato'] ."<i class='far fa-times-circle'></i></h2>";
+                                }else{
+                                    echo "<h2>Nombre introducido: ".$_POST['nombre_plato'] ."<i class='far fa-check-circle'></i></h2>";
+                                }
+                            }
+                        }
+                    }
+
+                    echo "
+                    <div id='back'>
+                        <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
+                    </div>";
+
+                }
+
+        ?>
+
+        
     <?php include 'footer.php' ?> 
     
 </body>

@@ -2,6 +2,8 @@
 
 <?php 
 
+error_reporting(0);
+
 if (!isset($_SESSION['user_valid'])) {
     header("Location: ../index.php");
     exit;
@@ -61,7 +63,7 @@ if(isset($_POST['submitL'])){
 
 #Lectura del menu, per categoria.
 
-$menus = file("../files/menus.txt");
+$menus = file("../files/menus.txt", FILE_IGNORE_NEW_LINES );
 
 $arrAp = [];
 $arrF = [];
@@ -98,8 +100,6 @@ function printArrInTable($arr){
             echo '<tr>';
             $idRadio = $arr[$i];
         }
-
-        
         
         echo '<td>'.$arr[$i].'</td>'; 
 
