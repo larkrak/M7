@@ -205,7 +205,7 @@ for ($i=0; $i < count($menus); $i++) {
 
     <div class="bg-image grayscale blur"></div>
 
-    <div class="menustext">
+    <div class="menustext userstxt">
         <h1>Menus</h1>
 
         <div style="display: flex;flex-direction: row;">

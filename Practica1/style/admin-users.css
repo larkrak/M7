@@ -1,0 +1,98 @@
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+table{
+    border-collapse: collapse;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: auto;
+    width: 50%;
+}
+
+
+table tr:nth-child(odd){
+    background-color:#dbdbdb;
+}
+
+table th{
+    background-color: #757575;
+}
+
+table th, table td{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+
+table input{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+
+#modificar{
+    background-color: darkcyan;
+}
+
+#eliminar{
+    background-color: rgba(255, 53, 53, 0.699);
+}
+
+#añadir{
+    text-align: center;
+    margin-top: 10px;
+}
+#nuevo, #añadir input{
+    background-color: orange;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+#users-content h2, h2{
+    text-align: center;
+}
+#modificar:hover {
+    background-color: rgba(0, 139, 139, 0.801);
+    color: white;
+    cursor: pointer;
+}
+
+#eliminar:hover{
+    background-color: rgba(255, 53, 53, 0.473);
+    color: white;
+    cursor: pointer;
+}
+#nuevo:hover{
+    background-color: rgba(255, 166, 0, 0.774);
+    color: white;
+    cursor: pointer;
+}
+
+#añadir input:hover{
+    background-color: rgba(255, 166, 0, 0.774);
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes fadeout{
+    0% { opacity: 1;}
+    100% {opacity: 0;}
+}
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(720deg); }
+  }
+
+  @keyframes fadein{
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }

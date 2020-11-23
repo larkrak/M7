@@ -1,116 +1,40 @@
 <?php session_start() ?>
-
-<?php 
+<?php
 
 error_reporting(0);
 
-if (!isset($_SESSION['user_valid'])) {
-    header("Location: ../index.php");
-    exit;
-}
+function getLine($radio){
+    $users = file("../files/users.txt");
+    $ret = [];
 
-if(isset($_POST['submitL'])){
+    for ($i=0; $i < count($users); $i++) { 
+        $linea = explode(";", $users[$i]);
     
-    if (session_id()){
-
-        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
-
-            $user_input = (trim($_POST['user']));  
-            $pass_input = (trim($_POST['pass']));
-
-            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
-
-                if((strlen($user_input)==0)){
-                    $user_req = true;
-                }
-                if((strlen($pass_input)==0)){
-                    $pass_req = true;
-                }
-                session_unset();
-                session_destroy();
-
-                header("Location:../index.php");
-                $logged = false;
-                                    
-            }else {
-
-                //Readin the FILE
-                $cadena = file("../files/users.txt");
-                
-                for ($i=0; $i < (count($cadena)); $i++) { 
-
-                    $checkUser = $cadena[$i];
-                    
-                    $checkUser = explode(";", $checkUser);
-
-                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
-
-                        $_SESSION['user'] = $user_input;
-                        $_SESSION['pass'] = $pass_input;
-                        $_SESSION['role'] = $checkUser[2];
-                        $_SESSION['name'] = $checkUser[3];
-                        $_SESSION['surname'] = $checkUser[4];
-                        $_SESSION['user_valid'] = true;
-                        $_SESSION['id'] = session_id();
-                        setcookie('user', $user_input);
-                        $logged = true;                        
-                    }
-                }
-            }
-        } 
+        if($linea[0] == $radio){
+            $ret = $linea;
+        }   
     }
+    return $ret;
 }
 
-#Lectura del menu, per categoria.
-
-$menus = file("../files/menus.txt", FILE_IGNORE_NEW_LINES );
-
-$arrAp = [];
-$arrF = [];
-$arrM = [];
-$arrD = [];
-$arrDr = [];
 
 
-for ($i=0; $i < count($menus); $i++) { 
-    $linea = explode(";", $menus[$i]);
 
-    if($linea[1] == 'appetiser'){
-        array_push($arrAp, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'firstcourse'){
-        array_push($arrF, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'maincourse'){
-        array_push($arrM, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'dessert'){
-        array_push($arrD, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'drink'){
-        array_push($arrDr, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-}
+if(isset($_POST)){
 
-function printArrInTable($arr){
-    $cont = 0;
-    for ($i=0; $i < count($arr) ; $i++) { 
+    if(isset($_POST['modificaruser']) || isset($_POST['eliminaruser'])){
 
-        if($cont == 0){
-            echo '<tr>';
-            $idRadio = $arr[$i];
-        }
-        
-        echo '<td>'.$arr[$i].'</td>'; 
-
-        $cont++;
-        if($cont == 4){
-            echo '<td style="text-align:center"><input value="'.$idRadio.'" name="selection" type="radio"></td>';
-            echo '</tr>';
-            $cont = 0;
+        if(isset($_POST['selectionuser'])){
+            $radioClicked = $_POST['selectionuser'];
+        }else{
+            header("Refresh:0; url=admin-users.php");
         }
     }
+
+    if(isset($_POST['selectionuser']) && isset($_POST['nuevouser'])) header("Refresh:0; url=admin-users.php");
 }
+
+
 
 
 ?>
@@ -143,11 +67,11 @@ function printArrInTable($arr){
                     }
                     if($_SESSION['role'] == 'staff'){
                         echo '<li><a href="menus.php">View Menus</a></li>';
-                        echo '<li><a href="#">Administrate menus</a></li>';
+                        echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
                         echo '<li><a href="menus.php">View Menus</a></li>';
-                        echo '<li><a href="#">Administrate menus</a></li>';
+                        echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                         echo '<li><a href="admin-users.php">Administrate users</a></li>';
                     } 
                 }else{
@@ -220,43 +144,104 @@ function printArrInTable($arr){
 
     </div>
 
-    
+    <?php 
+    if(isset($_POST['selectionuser'])){
 
+        if(isset($_POST['modificaruser'])){ 
+            
+            $lineaUser = ($_POST['selectionuser']);
+            
+        ?>
 
-    <div id="menu-content">
-            <form action="edit-file.php" method="POST">
-                <table>
-                    <th>ID</th>
-                    <th>CATEGORY</th>
-                    <th>NAME</th>
-                    <th>PRICE</th>
-                    <th>Selection</th>
-                    
+            <div id="menu-content">
+            <h2>Item clicked:</h2>
+            <table>
+                <th>USERNAME</th>
+                <th>PASSWORD</th>
+                <th>ROLE</th>
+                <th>NAME</th>
+                <th>SURNAME</th>
+                <tr>
                     <?php 
-
-                    printArrInTable($arrAp);
-                    printArrInTable($arrF);
-                    printArrInTable($arrM);
-                    printArrInTable($arrD);
-                    printArrInTable($arrDr);
-
+                        for ($i=0; $i < count(getLine($radioClicked)); $i++) { 
+                            echo '<td id=td"'.$i.'">'.getLine($radioClicked)[$i].'</td>';
+                        }
                     ?>
-                    </tr>
-                </table>
+                </tr>
+            </table>
+
+            <h2>New values:</h2>
+            <form action="#" method="POST">
+                <div id="form">
+                    <div>
+                        <label>ID:</label>
+                        <input name="username" type="text" readonly value="<?php echo getLine($radioClicked)[0]; ?>">
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input name="password" type="password" value="" placeholder="Password here">
+
+                    </div>
+                    <div>
+                        <label>Role:</label>
+                        <input name="role" type="text" value="" placeholder="Role here">
+
+                    </div>
+                    <div>
+                        <label>Name:</label>
+                        <input name="name" type="text" placeholder="New name here">
+                    </div>
+                    <div>
+                        <label>Surname:</label>
+                        <input name="surname" type="text" placeholder="Surname here">
+                    </div>
+
+                </div>
 
                 <table id="botones">
                     <tr>
-                        <td><input type="submit" name="modificar" id="modificar" value="Modificar seleccionado"></input></td>
-                        <td><input type="submit" name="eliminar" id="eliminar" value="Eliminar seleccionado"></input></td>
-                        <td><input type="submit" name="nuevo" id="nuevo" value="Añadir nuevo elemento"></input></td>
+                        <td><input type="submit" name="modificaruser_txt" id="modificar" value="Aceptar cambios"></input></td>
                     </tr>
                 </table>
+
             </form>
+        </div>
+        <?php 
+        }
+
+        if(isset($_POST['eliminaruser'])){
+            echo "eliminar";
+        }
 
 
 
-    </div>
+    ?>
+      
+    <?php
+                
+        
+    } // Cierre if SELECTION
 
+    if(!isset($_POST['selectionuser'])){
+
+        echo "No sel";
+
+        if(isset($_POST['modificaruser_txt'])){
+            
+            echo "HOLA";
+        
+        }
+
+        if(isset($_POST['nuevouser'])){
+            echo "SI";
+        }
+    }
+                
+
+
+    ?>
+
+        
     <?php include 'footer.php' ?> 
     
 </body>

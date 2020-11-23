@@ -63,16 +63,16 @@ if(isset($_POST)){
             <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'registered'){
-                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="menus.php">View Menus</a></li>';
                     }
                     if($_SESSION['role'] == 'staff'){
-                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="menus.php">View Menus</a></li>';
                         echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
-                        echo '<li><a href="comming-soon.php">View Menus</a></li>';
+                        echo '<li><a href="menus.php">View Menus</a></li>';
                         echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
-                        echo '<li><a href="comming-soon.php">Administrate users</a></li>';
+                        echo '<li><a href="admin-users.php">Administrate users</a></li>';
                     } 
                 }else{
                     echo '<li><a id="register">Register</a></li>';

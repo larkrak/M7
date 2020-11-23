@@ -1,96 +1,10 @@
 <?php session_start() ?>
-
-<?php 
+<?php
 
 error_reporting(0);
 
-if (!isset($_SESSION['user_valid'])) {
-    header("Location: ../index.php");
-    exit;
-}
-
-if(isset($_POST['submitL'])){
-    
-    if (session_id()){
-
-        if ( (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) ) {
-
-            $user_input = (trim($_POST['user']));  
-            $pass_input = (trim($_POST['pass']));
-
-            if ( (strlen($user_input)==0) || (strlen($pass_input)==0) ) {  
-
-                if((strlen($user_input)==0)){
-                    $user_req = true;
-                }
-                if((strlen($pass_input)==0)){
-                    $pass_req = true;
-                }
-                session_unset();
-                session_destroy();
-
-                header("Location:../index.php");
-                $logged = false;
-                                    
-            }else {
-
-                //Readin the FILE
-                $cadena = file("../files/users.txt");
-                
-                for ($i=0; $i < (count($cadena)); $i++) { 
-
-                    $checkUser = $cadena[$i];
-                    
-                    $checkUser = explode(";", $checkUser);
-
-                    if(($checkUser[0] === $user_input) && ($checkUser[1] === $pass_input)){
-
-                        $_SESSION['user'] = $user_input;
-                        $_SESSION['pass'] = $pass_input;
-                        $_SESSION['role'] = $checkUser[2];
-                        $_SESSION['name'] = $checkUser[3];
-                        $_SESSION['surname'] = $checkUser[4];
-                        $_SESSION['user_valid'] = true;
-                        $_SESSION['id'] = session_id();
-                        setcookie('user', $user_input);
-                        $logged = true;                        
-                    }
-                }
-            }
-        } 
-    }
-}
-
-#Lectura del menu, per categoria.
-
-$menus = file("../files/menus.txt", FILE_IGNORE_NEW_LINES );
-
-$arrAp = [];
-$arrF = [];
-$arrM = [];
-$arrD = [];
-$arrDr = [];
 
 
-for ($i=0; $i < count($menus); $i++) { 
-    $linea = explode(";", $menus[$i]);
-
-    if($linea[1] == 'appetiser'){
-        array_push($arrAp, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'firstcourse'){
-        array_push($arrF, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'maincourse'){
-        array_push($arrM, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'dessert'){
-        array_push($arrD, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-    if($linea[1] == 'drink'){
-        array_push($arrDr, $linea[0], $linea[1], $linea[2], $linea[3]);
-    }
-}
 
 function printArrInTable($arr){
     $cont = 0;
@@ -113,6 +27,7 @@ function printArrInTable($arr){
 }
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +36,7 @@ function printArrInTable($arr){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/index.css">
-    <link rel="stylesheet" href="../style/admin-menus.css">
+    <link rel="stylesheet" href="../style/admin-users.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/control/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
@@ -139,15 +54,15 @@ function printArrInTable($arr){
             <?php
                 if(isset($_SESSION['role'])){
                     if($_SESSION['role'] == 'registered'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
+                        echo '<li><a href="#">View Menus</a></li>';
                     }
                     if($_SESSION['role'] == 'staff'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
-                        echo '<li><a href="#">Administrate menus</a></li>';
+                        echo '<li><a href="#">View Menus</a></li>';
+                        echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                     } 
                     if($_SESSION['role'] == 'admin'){
-                        echo '<li><a href="menus.php">View Menus</a></li>';
-                        echo '<li><a href="#">Administrate menus</a></li>';
+                        echo '<li><a href="#">View Menus</a></li>';
+                        echo '<li><a href="admin-menus.php">Administrate menus</a></li>';
                         echo '<li><a href="admin-users.php">Administrate users</a></li>';
                     } 
                 }else{
@@ -220,43 +135,56 @@ function printArrInTable($arr){
 
     </div>
 
-    
-
-
-    <div id="menu-content">
-            <form action="edit-file.php" method="POST">
+    <div id="users-content">
+            <form action="edit-user.php" method="POST">
                 <table>
-                    <th>ID</th>
-                    <th>CATEGORY</th>
-                    <th>NAME</th>
-                    <th>PRICE</th>
-                    <th>Selection</th>
-                    
-                    <?php 
-
-                    printArrInTable($arrAp);
-                    printArrInTable($arrF);
-                    printArrInTable($arrM);
-                    printArrInTable($arrD);
-                    printArrInTable($arrDr);
-
-                    ?>
+                    <tr>
+                        <th>USERNAME</th>
+                        <th>PASSWORD</th>
+                        <th>ROLE</th>
+                        <th>NAME</th>
+                        <th>SURNAME</th>
+                        <th>SELECTION</th>
                     </tr>
+                    <?php 
+                    $users = file("../files/users.txt", FILE_IGNORE_NEW_LINES );
+                    $cont = 0;
+
+                    for ($i=0; $i < count($users); $i++) { 
+                        $linea = explode(";", $users[$i]);
+                        
+
+                        if($cont == 0){
+                            echo '<tr>';
+                            $idRadio = $i;
+                        }
+
+                        for ($j=0; $j < count($linea) ; $j++) {  
+                            $cont++;       
+                            echo '<td>'.$linea[$j].'</td>'; 
+                            if($cont == (count($linea))){
+                                echo '<td style="text-align:center"><input value="'.$linea[0].'" name="selectionuser" type="radio"></td>';
+                                echo '</tr>';
+                                $cont = 0;
+                            }
+                        }
+                        
+                    }
+                    ?>
+
                 </table>
 
                 <table id="botones">
                     <tr>
-                        <td><input type="submit" name="modificar" id="modificar" value="Modificar seleccionado"></input></td>
-                        <td><input type="submit" name="eliminar" id="eliminar" value="Eliminar seleccionado"></input></td>
-                        <td><input type="submit" name="nuevo" id="nuevo" value="Añadir nuevo elemento"></input></td>
+                        <td><input type="submit" name="modificaruser" id="modificar" value="Modificar seleccionado"></input></td>
+                        <td><input type="submit" name="eliminaruser" id="eliminar" value="Eliminar seleccionado"></input></td>
+                        <td><input type="submit" name="nuevouser" id="nuevo" value="Añadir nuevo elemento"></input></td>
                     </tr>
                 </table>
             </form>
-
-
-
     </div>
 
+        
     <?php include 'footer.php' ?> 
     
 </body>

@@ -2,7 +2,7 @@ username;password;role;name;surname
 user1;pass1;admin;Juan;Garcia
 user2;pass2;staff;Alberto;Medel
 isma;isma;registered;Ismael;Collado
-vis1;vis1;visitor;Visitor;Garciaasd;asd;registered;asd;asd
+vis1;vis1;visitor;Visitor;Garciaasd
 asd;asd;registered;asd;asd
 putitabaratita;asd;registered;putita;barata
 AA;SS;registered;asdaASD;SSSSS
