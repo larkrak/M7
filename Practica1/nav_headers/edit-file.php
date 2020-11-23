@@ -20,15 +20,18 @@ function getLine($radio){
 
 
 
-
 if(isset($_POST)){
 
     if(isset($_POST['modificar']) || isset($_POST['eliminar'])){
 
         if(isset($_POST['selection'])){
             $radioClicked = $_POST['selection'];
+        }else{
+            header("Refresh:0; url=admin-menus.php");
         }
     }
+
+    if(isset($_POST['selection']) && isset($_POST['nuevo'])) header("Refresh:0; url=admin-menus.php");
 }
 
 
@@ -303,13 +306,18 @@ if(isset($_POST)){
                                     $plato[2] = $_POST['nombre_plato'];
                                     $plato[3] = $_POST['precio_plato'];
                                     break;
-                                }
+                                }   
                             }
                         }
+
+                    
                         $file[($linea_fichero)-1] = $_POST['id_plato'].";". $_POST['category_plato'].";".$_POST['nombre_plato'].";". $_POST['precio_plato']."\n";
                         if(file_put_contents("../files/menus.txt", $file)){
                             echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Change made successfully</h2>';
-                        }
+                        }  
+                        
+
+                        
                     }else{
                         if(is_nan($_POST['precio_plato']) || !is_string($_POST['nombre_plato'])){
                             echo '<h2 style="text-align:center;margin-top:30px;margin-top:30px">Invalid parameters found:</h2>';
@@ -359,19 +367,18 @@ if(isset($_POST)){
                     if($exist == false){
                         $file[(count($file))+1] = (($mayor)+1).";". $_POST['category_plato'].";".$_POST['nombre_plato'].";". $_POST['precio_plato']."\n";
                         if(file_put_contents("../files/menus.txt", $file)){
+                            echo '<div class="loader"></div>';
+                            echo "<div id='added'>";
                             echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Added successfully</h2>';
+                            echo "
+                            <div id='back'>
+                                <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
+                            </div>";
+                            echo "</div>";
                         }
                     }else{
                         echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Already in the menu</h2>';
                     }
-
-                    echo "
-                    <div id='back'>
-                        <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
-                    </div>";
-                    
-
-
                 }
 
         ?>

@@ -2,7 +2,6 @@
 02;firstcourse;Costillas de niño;432
 03;maincourse;Caldo de verduras;12,5
 04;dessert;Flan de queso;4,5
-05;drink;cococolo;12
 09;dessert;Flan de huevos;7
 30;firstcourse;Albondigas de la casa;20,03 
 06;appetiser;Ensalada;13
@@ -10,11 +9,11 @@
 20;appetiser;Ensalada;4,67
 08;maincourse;Estofado;5
 10;appetiser;Ensalada de marisco;7,90
-11;drink;Fanta;2,43
 12;appetiser;Croquetas;56,8
 14;maincourse;Sopa;21
-15;dessert;Tarta de Queso;2
-17;dessert;Tarda de nata;23
-31;dessert;tarta de berberechos;12
+15;drink;caca;caca
+17;drink;caca;22
 32;appetiser;Outita;900
-33;dessert;cojones de mono;12
+34;appetiser;Pita;45
+35;appetiser;caca;s
+36;appetiser;caass;12
