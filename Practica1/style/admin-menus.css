@@ -48,14 +48,23 @@ table input{
 #eliminar{
     background-color: rgba(255, 53, 53, 0.699);
 }
-#nuevo{
+
+#añadir{
+    text-align: center;
+    margin-top: 10px;
+}
+#nuevo, #añadir input{
     background-color: orange;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 2px;
 }
 
-#menu-content h2{
+#menu-content h2, h2{
     text-align: center;
 }
-#modificar:hover{
+#modificar:hover {
     background-color: rgba(0, 139, 139, 0.801);
     color: white;
     cursor: pointer;
@@ -67,7 +76,13 @@ table input{
     cursor: pointer;
 }
 #nuevo:hover{
-    background-color: rgba(255, 166, 0, 0.61);
+    background-color: rgba(255, 166, 0, 0.774);
+    color: white;
+    cursor: pointer;
+}
+
+#añadir input:hover{
+    background-color: rgba(255, 166, 0, 0.774);
     color: white;
     cursor: pointer;
 }
@@ -157,3 +172,42 @@ h2 i.fa-check-circle{
     cursor: pointer;
     color: white;
 }
+
+#deleted{
+    opacity: 0;
+    -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 3s; /* Firefox < 16 */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera < 12.1 */
+            animation: fadein 3s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+}
+
+.loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    height: 120px;
+    animation: spin 0.8s linear infinite, fadeout 2s linear;
+    animation-fill-mode: forwards;
+  }
+  
+@keyframes fadeout{
+    0% { opacity: 1;}
+    100% {opacity: 0;}
+}
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(720deg); }
+  }
+
+  @keyframes fadein{
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }

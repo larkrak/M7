@@ -206,40 +206,86 @@ if(isset($_POST)){
 
         <?php }if(isset($_POST['eliminar'])){ 
 
+            ?>
 
+        <div id="menu-content">
+            <h2>Item to delete:</h2>
+            <table>
+                <th>ID</th>
+                <th>CATEGORY</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <tr>
+                    <?php 
+                    for ($i=0; $i < count(getLine($radioClicked)); $i++) { 
+                        echo '<td id=td"'.$i.'">'.getLine($radioClicked)[$i].'</td>';
+                    }
+                    ?>
+                </tr>
+            </table>
+        </div>
+            <?php 
                 $file = file("../files/menus.txt");
-
                 for ($i=0; $i < count($file) ; $i++) { 
                     
                     for ($j=0; $j < strlen($file[$i]) ; $j++) { 
                         $plato = explode(";", $file[$i]);
-                        if($plato[0] == $_POST['id_plato']){
+                        if($plato[0] == $radioClicked){
                             $linea_fichero = $i+1;
                             break;
                         }
                     }
                 }
-                $file[($linea_fichero)-1] = "\n";
+                $file[($linea_fichero)-1] = "";
                 if(file_put_contents("../files/menus.txt", $file)){
-                    echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Change made successfully</h2>';
+                    echo '<div class="loader"></div>';
+                    echo "<div id='deleted'>";
+                    echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Deleted successfully</h2>';
+                    echo "
+                        <div id='back'>
+                            <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
+                        </div>";
+                    echo "</div>";
                 }
-                
-
-                echo "
-                <div id='back'>
-                    <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
-                </div>";
-
-                    
-
-        }
-
-        ?>
+        ?>          
         <?php
-            }
+                }
+    } // Cierre if SELECTION
 
+    if(!isset($_POST['selection'])){
+        if(isset($_POST['nuevo'])){ ?>
 
-                
+            <h2>New values:</h2>
+            <form action="#" method="POST">
+                <div id="form">
+                    <div>
+                        <label>Category:</label>
+                        <select name="category_plato" type="text" value="">
+                        <?php
+                            $file = file("../files/categories.txt");
+                            $categorias = explode(";", $file[0]);
+                            for ($i=0; $i < count($categorias) ; $i++) { 
+                                echo '<option>'.$categorias[$i].'</option>';
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Name:</label>
+                        <input name="nombre_plato" type="text" placeholder="Nuevo nombre" placeholder="New name here">
+                    </div>
+                    <div>
+                        <label>Price:</label>
+                        <input name="precio_plato" type="text" placeholder="Nuevo precio" placeholder="New price here">
+                    </div>
+
+                </div>
+                <div id="añadir">
+                    <input type="submit" name="nuevo_txt" id="añadir" value="Añadir plato"></input>
+                </div>
+            </form>
+      <?php  }
+    }
                 if(isset($_POST['modificar_txt'])){
                     if(!is_nan($_POST['precio_plato']) || is_string($_POST['nombre_plato'])){
 
@@ -287,6 +333,44 @@ if(isset($_POST)){
                     <div id='back'>
                         <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
                     </div>";
+
+                }
+
+                if(isset($_POST['nuevo_txt'])){
+                    
+                    $file = file("../files/menus.txt");
+                    $mayor = 0;
+                    $exist = false;
+                    for ($i=0; $i < count($file) ; $i++) { 
+                        
+                        for ($j=0; $j < strlen($file[$i]) ; $j++) { 
+                            $plato = explode(";", $file[$i]);
+                            if($plato[0] > $mayor){
+                                $mayor = $plato[0];
+                            }
+
+                            if($plato[2] == $_POST['nombre_plato']){
+                                $exist = true;
+                            break;
+                            }
+
+                        }
+                    }
+                    if($exist == false){
+                        $file[(count($file))+1] = (($mayor)+1).";". $_POST['category_plato'].";".$_POST['nombre_plato'].";". $_POST['precio_plato']."\n";
+                        if(file_put_contents("../files/menus.txt", $file)){
+                            echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Added successfully</h2>';
+                        }
+                    }else{
+                        echo '<h2 style="text-align:center;margin-top:30px;margin-bottom:30px">Already in the menu</h2>';
+                    }
+
+                    echo "
+                    <div id='back'>
+                        <a href='admin-menus.php'><input type='text' value='Back'></input></a></td>
+                    </div>";
+                    
+
 
                 }
 

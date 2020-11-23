@@ -1,22 +1,20 @@
-01;firstcourse;GOMGOS AL OJOLLO;35,67
+01;appetiser;Gambas al ajillo;120
 02;firstcourse;Costillas de niño;432
 03;maincourse;Caldo de verduras;12,5
 04;dessert;Flan de queso;4,5
-05;appetiser;fente;2
-09;dessert;putita;12
+05;drink;cococolo;12
+09;dessert;Flan de huevos;7
 30;firstcourse;Albondigas de la casa;20,03 
 06;appetiser;Ensalada;13
 07;firstcourse;Sopa;9,5
 20;appetiser;Ensalada;4,67
 08;maincourse;Estofado;5
 10;appetiser;Ensalada de marisco;7,90
-11;appetiser;caca;123
+11;drink;Fanta;2,43
 12;appetiser;Croquetas;56,8
 14;maincourse;Sopa;21
-15;appetiser;terte;2
-17;appetiser;asd;12
-18;appetiser;puta;123
-19;appetiser;asd;asd
-
-
-
+15;dessert;Tarta de Queso;2
+17;dessert;Tarda de nata;23
+31;dessert;tarta de berberechos;12
+32;appetiser;Outita;900
+33;dessert;cojones de mono;12
