@@ -112,11 +112,12 @@ table select{
 }
 
 #form div input, #form div select{
-    width: 200px;
+    width: 300px;
     padding: 10px;
     border: none;
     outline: none;
-    margin: 2px;
+    margin-left: 50px;
+    margin-top: 4px;
     background-color: rgba(180, 180, 180, 0.815);
 }
 

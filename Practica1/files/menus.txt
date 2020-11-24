@@ -9,10 +9,11 @@
 20;appetiser;Ensalada;4,67
 08;maincourse;Estofado;5
 10;appetiser;Ensalada de marisco;7,90
+11;appetiser;caca;caca
 12;appetiser;Croquetas;56,8
 14;maincourse;Sopa;21
-15;drink;caca;caca
-32;appetiser;Outita;900
-34;appetiser;Pita;45
-35;appetiser;caca;s
-36;appetiser;caass;12
+15;dessert;Tarta de Queso;2
+17;dessert;Tarda de nata;23
+18;appetiser;cacacac;sss
+31;drink;Cocacola;3,50
+32;drink;Fanta;2,50

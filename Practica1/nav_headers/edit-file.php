@@ -250,7 +250,7 @@ if(isset($_POST)){
                         </div>";
                     echo "</div>";
                 }
-        ?>          
+            ?>          
         <?php
                 }
     } // Cierre if SELECTION
