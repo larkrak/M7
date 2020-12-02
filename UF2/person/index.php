@@ -1,4 +1,9 @@
 <?php
-require "person.class.php";
+require "Clases/person.class.php";
 $mike = new Person("Mike", 20);
-echo $mike;
+
+$mine = new Person("cxaca", 2);
+
+$mine -> setName("CACA");
+
+echo $mine;
