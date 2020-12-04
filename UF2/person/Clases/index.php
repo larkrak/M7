@@ -1,5 +1,5 @@
 <?php
-require "Clases/person.class.php";
+require "person.class.php";
 $mike = new Person("Mike", 20);
 
 $mine = new Person("cxaca", 2);
