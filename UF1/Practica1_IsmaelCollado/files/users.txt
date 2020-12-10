@@ -1,8 +1,4 @@
-jaja;puta;registered;PUTA;PUTA 
-vis1;vis1;visitor;Visitor;Garciaasd
+
+pito;pito;registered;pito;vilanovaasd;asd;registered;asd;asdaaa;aaa;registered;aaa;aaa
+aaa;aaa;registered;aaa;aaa
 asd;asd;registered;asd;asd
-puta;asd;registered;nuevo;asd
-asdasd;sdsd;registered;sdsd;s
-aaaaaa;ssdsdad;visitor;asdasd;asdasd
-admin;admin;admin;admin;admin
-a;asd;registered;a;a
