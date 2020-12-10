@@ -81,7 +81,6 @@ if(isset($_POST['submitL'])){
 if(isset($_POST['submitR'])){
     $regOk = true;
     $findUser = false;
-    session_start();
     if (session_id()){
 
         if ((filter_has_var(INPUT_POST, 'name')) && (filter_has_var(INPUT_POST, 'surname')) && (filter_has_var(INPUT_POST, 'user')) && (filter_has_var(INPUT_POST, 'pass')) && (filter_has_var(INPUT_POST, 'confirm_pass'))){
@@ -111,11 +110,9 @@ if(isset($_POST['submitR'])){
 
                 if($findUser == false){
                     
-                    if($file){
-                        fwrite($file, "\n");
-                        $data = sprintf("%s;%s;%s;%s;%s", $user_input, $pass_input, $role, $name_input, $surname_input);
+                    if($cadena){
+                        $data = sprintf("%s;%s;%s;%s;%s\n", $user_input, $pass_input, $role, $name_input, $surname_input);
                         file_put_contents('./files/users.txt', $data, FILE_APPEND);
-
                     }else{
                         echo "Failed to read users!!";
                     }
