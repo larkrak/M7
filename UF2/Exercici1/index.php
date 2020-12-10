@@ -1,26 +1,49 @@
 <?php 
 
+session_start();
+
 require_once "model/user.class.php";
 
-function loadData(): array {
-    $userList = array();
-
-    array_push($userList, new User("u1","p1", "r1", "n1", "s1"));
-    array_push($userList, new User("u2","p2", "r2", "n2", "s2"));
-    array_push($userList, new User("u3","p3", "r3", "n3", "s3"));
-    array_push($userList, new User("u4","p4", "r4", "n4", "s4"));
-    array_push($userList, new User("u5","p5", "r5", "n5", "s5"));
-
-    return $userList;
-}
-
-$myUserList = loadData();
-
-foreach ($myUserList as $user) {
-
-    $user -> setUsername("CACA");
-
-    echo "<p>".$user."</p>";
+function loadData($username, $pass, $role, $name, $surname) {
+    $user = new User($username, $pass, $role, $name, $surname);
+    return $user;
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post" style="display: grid; grid-template-columns: 100px 200px; column-gap: 10px; row-gap: 15px;">
+        <label>Username</label>
+        <input type="text" name="username" id="" placeholder="Username here...">
+        <label>Password</label>
+        <input type="password" name="password" id="" placeholder="Password here...">
+        <label>Role</label>
+        <input type="text" name="role" id="" placeholder="Role here...">
+        <label>Name</label>
+        <input type="text" name="name" id="" placeholder="Name here...">
+        <label>Surname</label>
+        <input type="text" name="surname" id="" placeholder="Surname here...">
+        <input type="submit" name="submit" value="submit">
+    </form>
+    <?php
+        if(isset($_POST['submit'])){
+            $myUser = loadData($_POST['username'], $_POST['password'], $_POST['role'], $_POST['name'], $_POST['surname']);
+            $_SESSION['userList'][] = $myUser;
+
+            foreach ($_SESSION['userList'] as $user) {
+                echo $user;
+            }
+        }
+
+    ?>
+    
+</body>
+</html>
+

@@ -57,9 +57,10 @@ class User {
     public function setSurname(String $surname){
         $this->surname = $surname;
     }
-
     public function __toString(){
         return sprintf(
+            "%s{[username=%s][password=%s][role=%s][name=%s][surname=%s]}", 
+            get_class($this),
             $this->username,
             $this->password,
             $this->role,
