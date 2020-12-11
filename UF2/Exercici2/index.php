@@ -53,6 +53,25 @@ if(isset($_POST['submit'])){
         <input type="text" name="surname" id="" placeholder="Surname here...">
         <input type="submit" name="submit" value="submit">
     </form>
+
+    <div>
+        <p>
+            <?php
+
+            $file = fopen("./files/users.txt", "r");
+            if ($file) {
+                while (($búfer = fgets($file, 4096)) !== false) {
+                    echo $búfer . "<br>";
+                }
+                if (!feof($file)) {
+                    echo "Error: fallo inesperado de fgets()\n";
+                }
+                fclose($file);
+            }
+
+            ?>
+        </p>
+    </div>
 </body>
 </html>
 
