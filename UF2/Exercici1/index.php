@@ -1,8 +1,8 @@
 <?php 
-
+require_once "model/user.class.php";
 session_start();
 
-require_once "model/user.class.php";
+
 
 function loadData($username, $pass, $role, $name, $surname) {
     $user = new User($username, $pass, $role, $name, $surname);
@@ -36,11 +36,16 @@ function loadData($username, $pass, $role, $name, $surname) {
         if(isset($_POST['submit'])){
             $myUser = loadData($_POST['username'], $_POST['password'], $_POST['role'], $_POST['name'], $_POST['surname']);
             $_SESSION['userList'][] = $myUser;
-
-            foreach ($_SESSION['userList'] as $user) {
-                echo $user;
+            if(isset($_SESSION)){
+                $userNum = 0;
+                foreach ($_SESSION['userList'] as $user) {
+                    $userNum += 1;
+                    echo $user."<br>";
+                }
             }
         }
+
+        
 
     ?>
     
