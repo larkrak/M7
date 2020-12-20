@@ -8,13 +8,17 @@
  * renders menu.
  * @return string
  */
+
+namespace proven\files;
+
 function renderMenu(): string {
     $menu =  [
         ["home", "index.php"],
         ["list products", "listproducts.php"],
         ["add product", "addproduct.php"],
         ["login", "login.php"],
-        ["logout", "logout.php"]
+        ["logout", "logout.php"],
+        ["TESTER", "php-fn/tester.php"]
     ];
     $htmlMenu = "";
     $htmlMenu .= sprintf("<ul>\n");

@@ -10,6 +10,35 @@
  * Restrictions: this script is only available to users with started session,
  * that is, users who are logged in the application.
  */
+
+session_start();
+
+
+
+if(isset($_SESSION['user'])){
+
+    if(isset($_POST['submit'])){
+
+        if(isset($_POST['estrellas'])){
+
+            setcookie("puntuacion", $_POST['estrellas'], time()+3600);
+            $_COOKIE['puntuacion'] = $_POST['estrellas'];
+
+        }
+    }
+}else{
+    header("Location:index.php");
+}
+
+    echo "<h3>Your last puntuation was: ".$_COOKIE['puntuacion']."</h3>";
+    session_destroy();
+
+
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +49,14 @@
     <body>
         <?php include_once "mainmenu.php"; ?>
         <h2>Logout page</h2>
-        <p>Page under construction!</p>
+
+        <form action="" method="post">
+            <label>Select your puntuation:</label>
+            <input name="estrellas" type="number" max="5" min="0">
+
+            <input name="submit" type="submit" value="Send valoration">
+        </form>
+
         <?php include_once "footer.php"; ?>
     </body>
 </html>
