@@ -15,7 +15,7 @@ class FilePersist {
         return $this->handler;
     }
 
-    public function getMode(): string {
+    public function getMode(): ?string {
         return $this->mode;
     }
 
@@ -32,6 +32,9 @@ class FilePersist {
         if ($this->isOpen()) {  //already open.
             $result = 0; // already open code.
         }
+
+        echo $this->filename;
+
         $this->mode = $mode;
         if (file_exists($this->filename) && is_file($this->filename)) {
             $this->handler = fopen($this->filename, $this->mode);
