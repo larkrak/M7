@@ -35,7 +35,6 @@ abstract class GeneticSequence implements SequenceInterface {
                 $bases[$this->elements[$i]]=1;
             }                
         }
-
         return $bases;
     }    
     
