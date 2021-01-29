@@ -9,11 +9,6 @@ if(isset($_POST['submitdog'])){
     $_SESSION['dogs'][] = $dog;
     //var_dump($_SESSION['dogs']);
 
-    foreach ($_SESSION['dogs'] as $dog) {
-        echo $dog->talk();
-        echo '<br>';
-    }
-
 }
 
 if(isset($_POST['submitcat'])){
